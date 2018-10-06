@@ -1,0 +1,129 @@
+<robot name="test_robot">
+
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+  <material name="green">
+    <color rgba="0 1 0 1"/>
+  </material>
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="pink">
+    <color rgba="0.96 0 0.745 1"/>
+  </material>
+  <material name="yellow">
+    <color rgba="1 1 0 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.11 0.075 0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <link name="l_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.028" radius="0.028"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_l_wheel" type="fixed">
+    <parent link="base_link"/>
+    <child link="l_wheel"/>
+    <origin xyz="0.03 0.06 0.028" rpy="1.5708 0 0"/>
+  </joint>
+
+  <link name="r_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.028" radius="0.028"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_r_wheel" type="fixed">
+    <parent link="base_link"/>
+    <child link="r_wheel"/>
+    <origin xyz="0.03 -0.06 0.028" rpy="-1.5708 0 0"/>
+  </joint>
+
+ <link name="wheel_axis">
+    <visual>
+      <geometry>
+        <box size="0.02 0.096 0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_wheel_axis" type="fixed">
+    <parent link="base_link"/>
+    <child link="wheel_axis"/>
+    <origin xyz="0.03 0 0.028" rpy="0 0 0"/>
+  </joint>
+
+  <link name="sphere">
+    <visual>
+      <geometry>
+        <sphere radius="0.014"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_sphere" type="fixed">
+    <parent link="base_link"/>
+    <child link="sphere"/>
+    <origin xyz="-0.075 0 0.014" rpy="0 0 0"/>
+  </joint>
+
+  <link name="sensor_1">
+    <visual>
+      <geometry>
+        <box size="0.05 0.02 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="pink"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_sensor_1" type="fixed">
+    <parent link="base_link"/>
+    <child link="sensor_1"/>
+    <origin rpy="0 0 0" xyz="-0.08 0.05 0.16"/>
+  </joint>
+
+  <link name="sensor_2">
+    <visual>
+      <geometry>
+        <box size="0.05 0.02 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="yellow"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_sensor_2" type="fixed">
+    <parent link="base_link"/>
+    <child link="sensor_2"/>
+    <origin rpy="0 0 0" xyz="0.08 0.05 0.16"/>
+  </joint>
+
+
+</robot>
