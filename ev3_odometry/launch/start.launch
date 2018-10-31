@@ -1,0 +1,16 @@
+<launch>
+
+  <!-- Start description server and RViz -->
+   <include file="$(find ev3_description)/launch/ev3.launch" />
+
+   <!-- Start fake odometry -->
+   <node pkg="ev3_odometry" name="ev3_fake_odom_node"
+     type="ev3_fake_odom.py"
+     output="screen"/>
+
+  <!-- Visualize trajectory in RViz -->
+  <node pkg="ev3_odometry" name="ev3_trajectory_visualizer_node"
+    type="ev3_trajectory_visualizer.py"
+    output="screen"/>
+
+</launch>
