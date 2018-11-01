@@ -44,7 +44,11 @@ E.g: The ev3dev/debian-jessie-cross image will not boot after put in a SDcard.
 In order to implement odmetry for Ev3Dev, one can use [Odometrium](https://github.com/sterereo/odometrium) as reference.
 
 ### Example of mounting a syncronized folder Lego to your PC
+After pairing via Bluetooth, use the following command:
+```
 sudo sshfs -o  allow_other robot@ev3dev.local:/FOLDER/PATH/INSIDE/LEGO/ /FOLDER/PATH/INSIDE/HOST
+```
+
 
 #### TODO: Set ev3dev to ros master node outside Lego Ev3
 
