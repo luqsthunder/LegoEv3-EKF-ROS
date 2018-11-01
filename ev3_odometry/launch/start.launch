@@ -13,4 +13,9 @@
     type="ev3_trajectory_visualizer.py"
     output="screen"/>
 
+  <!-- Add obstacle markers to serve as walls -->
+  <node pkg="ev3_odometry" name="ev3_obstacle_visualizer_node"
+    type="ev3_obstacles.py"
+    output="screen"/>
+
 </launch>

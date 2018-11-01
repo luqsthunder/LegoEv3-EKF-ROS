@@ -28,7 +28,7 @@ vth = 2
 current_time = rospy.Time.now()
 last_time = rospy.Time.now()
 
-r = rospy.Rate(60.0)
+r = rospy.Rate(20.0)
 while not rospy.is_shutdown():
     current_time = rospy.Time.now()
 
