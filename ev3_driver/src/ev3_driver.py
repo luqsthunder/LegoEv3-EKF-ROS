@@ -1,12 +1,29 @@
 from ev3dev.ev3 import *
 from math import pi
 from time import sleep
+import rospy
 
 RAD_TO_DEGREE =  180.0/pi #para conversão de radiano para graus
 
 class RobotController:
     def __init__(self, port_wheel_l= 'A', port_wheel_r = 'D', frequency = 20,
-                 radius_wheel_l = 0.025, radius_wheel_r = 0.025):
+                 radius_wheel_l = 0.025, radius_wheel_r = 0.025,
+                 create_node_sub = False):
+        """
+        @params
+        port_wheel_l
+
+        port_wheel_r
+
+        frequency
+
+        radius_wheel_l
+
+        radius_wheel_r
+
+        create_node_sub
+        """
+
         # velocidade linear da roda esquerda em metros por segundo
         self.vel_wheel_l = 0.0
         self.vel_wheel_r = 0.0
@@ -26,7 +43,15 @@ class RobotController:
         self.dt = 1.0 / frequency
         self.curr_t = 0
 
-    def updateVel(self, vel_wheel_l, vel_wheel_r, stop_action='coast' ):
+        ## colocar os topicos para subscrever
+        if create_node_sub:
+            self.create_node()
+
+
+    def create_node():
+        
+
+    def updateVel(self, vel_wheel_l, vel_wheel_r, stop_action='coast'):
         self.vel_wheel_l = vel_wheel_l
         self.vel_wheel_r = vel_wheel_r
         # incremento do tempo esperando ser 1/frequencia
@@ -41,7 +66,9 @@ class RobotController:
         self.motor_r.run_timed(time_sp = self.dt_ms, stop_action = stop_action,
                                speed_sp = self.w_wheel_r)
 
-    #
+    def convertLinearToWheelAng(self, ):
+        
+
     def curWheelsDistance(self):
         """
 
