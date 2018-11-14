@@ -127,33 +127,33 @@ def update_state(linear_vel=0.05, angular_vel=math.pi/8,
         If target_pose is reached or not
     """
     global estimated_pose, target_pose, twist_cmd
-
     # Assume that pose is not reached yet
     reached_target = False
-
     # Calculate differences
     delta_x = target_pose.x - estimated_pose.x
     delta_y = target_pose.y - estimated_pose.y
     delta_theta = target_pose.theta - estimated_pose.theta
 
     # Case 1: Position is not reached yet...
-    if delta_x > d_position or delta_y > d_position:
+    if abs(delta_x) > d_position or abs(delta_y) > d_position:
         # Calculate angle between current and target position
         delta_alpha = math.atan2(delta_x, delta_y)
-
         twist_cmd.linear.x = linear_vel
-        # Angular velocity can be clockwise or counterclockwise
-        angular_direction = - delta_alpha / abs(delta_alpha)
+        # Angular direction can be clockwise or counterclockwise
+        angular_direction = 0
+        if delta_alpha != 0:
+            angular_direction = - delta_alpha / abs(delta_alpha)
+        # Defining angular velocity
         twist_cmd.angular.z = angular_direction * angular_vel
         rospy.logdebug("[DEBUG] Update stepped into case 1")
-
     # Case 2: Position is reached, but orientation is not...
-    elif delta_theta > d_theta:
+    elif abs(delta_theta) > d_theta:
         twist_cmd.linear.x = 0
-        angular_direction = delta_theta / abs(delta_theta)
+        angular_direction = 0
+        if delta_theta != 0:
+            angular_direction = delta_theta / abs(delta_theta)
         twist_cmd.angular.z = angular_direction * angular_vel
         rospy.logdebug("[DEBUG] Update stepped into case 2")
-
     # Case 3: Position and orientation are reached...
     else:
         twist_cmd.linear.x = 0
@@ -162,8 +162,7 @@ def update_state(linear_vel=0.05, angular_vel=math.pi/8,
         rospy.logdebug("[DEBUG] Update stepped into case 3")
 
     # Debugging messages
-
-    rospy.logdebug("[DEBUG] Desited pose: {}, {}, {}".format(
+    rospy.logdebug("[DEBUG] Desired pose: {}, {}, {}".format(
         target_pose.x,
         target_pose.y,
         target_pose.theta))
@@ -171,7 +170,6 @@ def update_state(linear_vel=0.05, angular_vel=math.pi/8,
         estimated_pose.x,
         estimated_pose.y,
         estimated_pose.theta))
-
     return reached_target
 
 def init_square(side_length = 1.0):
@@ -184,14 +182,19 @@ def init_square(side_length = 1.0):
     """
     global pose_array, pose_index
     half_side = side_length / 2.0
-
     # Fill pose_array with vertices of square
     pose_array = []
+    """
+    For testing purposes, we have following orientations around Z axis wrt. X:
+    0     = [0, 0, 0, 0]
+    pi/2  = [0, 0, 0.707, 0.707]
+    pi    = [0, 0, 1, 0]
+    -pi/2 = [0, 0, -0.707, 0.707]
+    """
     pose_array.append( create_pose2d(  half_side,  half_side,  math.pi) )
-    pose_array.append( create_pose2d( -half_side,  half_side,  3*math.pi/2 ) )
+    pose_array.append( create_pose2d( -half_side,  half_side,  -math.pi/2 ) )
     pose_array.append( create_pose2d( -half_side, -half_side,  0 ) )
     pose_array.append( create_pose2d(  half_side, -half_side,  math.pi/2 ) )
-
     # Start with first pose as target
     pose_index = 0
     set_target_pose( pose_array[pose_index] )
