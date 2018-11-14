@@ -9,7 +9,7 @@ There is also an example of how to perform odometry in [ROS Navigation](http://w
 ### References for Kalman Filter
 There is an implemented package for Kalman Filter that combines Odometry and visual information. It is called [Robot Pose EKF](http://wiki.ros.org/robot_pose_ekf).
 
-### For further details, please check out out [Wiki](https://github.com/luqsthunder/LegoEv3-EKF-ROS/wiki).
+### For further details, please check out our [Wiki](https://github.com/luqsthunder/LegoEv3-EKF-ROS/wiki).
 
 ### Pending Tasks
 - [ ] add code inside EV3 to read sensors
