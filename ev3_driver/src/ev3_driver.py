@@ -32,7 +32,8 @@ class RobotController:
         # incremento do tempo esperando ser 1/frequencia
         self.cur_t += dt
 
-        self.w_wheel_l = RAD_TO_DEGREE*self.vel_wheel_l/self.radius_wheel_l # v_linear = v_angular*radius
+        # v_linear = v_angular*radius
+        self.w_wheel_l = RAD_TO_DEGREE*self.vel_wheel_l/self.radius_wheel_l
         self.w_wheel_r = RAD_TO_DEGREE*self.vel_wheel_r/self.radius_wheel_r
 
         self.motor_l.run_timed(time_sp = self.dt_ms, stop_action = stop_action,
