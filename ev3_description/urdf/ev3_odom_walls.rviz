@@ -4,11 +4,9 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
         - /Status1
-        - /TF1/Frames1
+        - /TF1
         - /TF1/Tree1
-        - /MarkerArray1
       Splitter Ratio: 0.5
     Tree Height: 435
   - Class: rviz/Selection
@@ -103,19 +101,48 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_link:
+          Value: false
+        l_wheel:
+          Value: false
+        odom:
+          Value: true
+        r_wheel:
+          Value: false
+        sensor_1:
+          Value: false
+        sensor_2:
+          Value: false
+        sphere:
+          Value: false
+        wheel_axis:
+          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        odom:
+          base_link:
+            l_wheel:
+              {}
+            r_wheel:
+              {}
+            sensor_1:
+              {}
+            sensor_2:
+              {}
+            sphere:
+              {}
+            wheel_axis:
+              {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -179,18 +206,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.112995736
-        Y: 0.0555786453
-        Z: -0.0784542933
+        X: -0.0601540431
+        Y: -0.0592446327
+        Z: -0.126332745
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.625398636
+      Pitch: 1.10979676
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.593556881
+      Yaw: 4.7067275
     Saved: ~
 Window Geometry:
   Displays:
@@ -208,5 +235,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1200
-  X: 83
-  Y: 24
+  X: 674
+  Y: 168

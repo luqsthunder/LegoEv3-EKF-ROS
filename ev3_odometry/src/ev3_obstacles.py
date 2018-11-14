@@ -11,7 +11,7 @@ from visualization_msgs.msg import MarkerArray
 import rospy
 import math
 
-def create_marker(x, y, z, sx, sy, sz):
+def create_marker(x, y, z, sx, sy, sz, r=1.0, g=1.0, b=0.0):
     marker = Marker()
     marker.header.frame_id = "/odom"
     marker.type = marker.CUBE
@@ -20,9 +20,9 @@ def create_marker(x, y, z, sx, sy, sz):
     marker.scale.y = sy
     marker.scale.z = sz
     marker.color.a = 1.0
-    marker.color.r = 1.0
-    marker.color.g = 1.0
-    marker.color.b = 0.0
+    marker.color.r = r
+    marker.color.g = g
+    marker.color.b = b
     marker.pose.position.x = x
     marker.pose.position.y = y
     marker.pose.position.z = z
@@ -40,10 +40,10 @@ def start_publishing(rate, l, d):
 
     # Generate markers
     markerArray = MarkerArray()
-    markerArray.markers.append(create_marker(-l, -d, 0.1,  0.1, 0.4, 0.2))
-    markerArray.markers.append(create_marker( l,  d, 0.1,  0.1, 0.4, 0.2))
-    markerArray.markers.append(create_marker(-d,  l, 0.1,  0.4, 0.1, 0.2))
-    markerArray.markers.append(create_marker( d, -l, 0.1,  0.4, 0.1, 0.2))
+    markerArray.markers.append(create_marker(d,   l, 0.1,  0.4, 0.1, 0.2, 1,1,1))
+    markerArray.markers.append(create_marker(-l,  d, 0.1,  0.1, 0.4, 0.2))
+    markerArray.markers.append(create_marker(-d, -l, 0.1,  0.4, 0.1, 0.2))
+    markerArray.markers.append(create_marker( l, -d, 0.1,  0.1, 0.4, 0.2))
 
     # Set markers ID
     id = 0
@@ -61,4 +61,4 @@ def start_publishing(rate, l, d):
        hz.sleep()
 
 if __name__ == '__main__':
-    start_publishing(20, 1, 0.6)
+    start_publishing(20, 1.1, 0.6)
