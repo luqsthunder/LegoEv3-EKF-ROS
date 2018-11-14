@@ -6,7 +6,7 @@ RAD_TO_DEGREE =  180.0/pi #para conversão de radiano para graus
 
 class RobotController:
     def __init__(self, port_wheel_l= 'A', port_wheel_r = 'D', frequency = 20,
-                radius_wheel_l = 0.025, radius_wheel_r = 0.025):
+                 radius_wheel_l = 0.025, radius_wheel_r = 0.025):
         self.vel_wheel_l = 0.0 # velocidade linear da roda esquerda em metros por segundo
         self.vel_wheel_r = 0.0
         self.dist_wheel_l = 0.0 # distancia percorrida pela roda esquerda em metros
@@ -19,10 +19,13 @@ class RobotController:
         self.motor_r = LargeMotor('out' + port_wheel_r)
         self.dt_ms = 1000.0 / frequency
         self.dt = 1.0 / frequency
+        self.curr_t = 0
 
     def updateVel(self, vel_wheel_l, vel_wheel_r, stop_action='coast' ):
         self.vel_wheel_l = vel_wheel_l
         self.vel_wheel_r = vel_wheel_r
+        # incremento do tempo esperando ser 1/frequencia
+        self.cur_t += dt
 
         self.w_wheel_l = RAD_TO_DEGREE*self.vel_wheel_l/self.radius_wheel_l # v_linear = v_angular*radius
         self.w_wheel_r = RAD_TO_DEGREE*self.vel_wheel_r/self.radius_wheel_r
@@ -30,7 +33,22 @@ class RobotController:
         self.motor_l.run_timed(time_sp = self.dt_ms, stop_action = stop_action,
                                 speed_sp = self.w_wheel_l)
         self.motor_r.run_timed(time_sp = self.dt_ms, stop_action = stop_action,
-                                speed_sp = self.w_wheel_r)
+                               speed_sp = self.w_wheel_r)
+
+    #
+    def curWheelsDistance(self):
+        """
+        """
+
+        dist_l = self.motor_l.position / self.motor_l.count_per_rot
+        dist_l *= (pi * self.radius_wheel_l)
+
+        dist_r = self.motor_r.position / self.motor_r.count_per_rot
+        dist_r *= (pi * self.radius_wheel_r)
+
+        return (dist_l, dist_r)
+
+
 
 if __name__ == "__main__":
 
