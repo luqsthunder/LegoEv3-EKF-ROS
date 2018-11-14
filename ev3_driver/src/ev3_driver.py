@@ -7,12 +7,17 @@ RAD_TO_DEGREE =  180.0/pi #para conversão de radiano para graus
 class RobotController:
     def __init__(self, port_wheel_l= 'A', port_wheel_r = 'D', frequency = 20,
                  radius_wheel_l = 0.025, radius_wheel_r = 0.025):
-        self.vel_wheel_l = 0.0 # velocidade linear da roda esquerda em metros por segundo
+        # velocidade linear da roda esquerda em metros por segundo
+        self.vel_wheel_l = 0.0
         self.vel_wheel_r = 0.0
-        self.dist_wheel_l = 0.0 # distancia percorrida pela roda esquerda em metros
+        # distancia percorrida pela roda esquerda em metros
+        self.dist_wheel_l = 0.0
         self.dist_wheel_r = 0.0
-        self.w_wheel_l = 0.0 # velocidade da roda esquerda em graus por segundo
+
+        # velocidade da roda esquerda em graus por segundo
+        self.w_wheel_l = 0.0
         self.w_wheel_r = 0.0
+
         self.radius_wheel_l = radius_wheel_l # angulo da roda esquerda
         self.radius_wheel_r = radius_wheel_r
         self.motor_l = LargeMotor('out' + port_wheel_l)
@@ -38,6 +43,7 @@ class RobotController:
     #
     def curWheelsDistance(self):
         """
+
         """
 
         dist_l = self.motor_l.position / self.motor_l.count_per_rot
